@@ -2,5 +2,6 @@
 *.dta
 
 # Ignore Excel data files
-*.xls*
+*.xlsx
 *.csv
+*.txt
