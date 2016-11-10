@@ -2,7 +2,7 @@
 File        : pb-case-b.do  <--- this should be the exact name of THIS document
 Author      : Kristina Tobio 
 Created     : 08 Nov 2016
-Modified    : 09 Nov 2016
+Modified    : 10 Nov 2016
 Description : .do file for Pilgrim Bank Case Part B 
 **********************************************************************************/
 
@@ -39,8 +39,11 @@ sum _9online _0online
 // Do customer attributes from 1999 significantly predict customer profitability in 2000?
 regress _0profit _9online
 // What if we add some controls? What coefficients are significant?
-// the i. command automatically creates dummy variables from a categorical variable.
+// The i. command automatically creates dummy variables from a categorical variable.
 regress _0profit _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
+// We should also control for the customer's profitability in 1999
+regress _0profit _9profit _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
+
 
 // PART 2: FORECAST INDIVIDUAL CUSTOMER PROFITABILITY
 // PART 3: IDENTIFY DRIVERS OF CUSTOMER RETENTION
