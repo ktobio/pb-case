@@ -59,6 +59,13 @@ matrix b = e(b)'
 putexcel A2 = matrix(b), rownames nformat(number_d2)
 
 // PART 3: IDENTIFY DRIVERS OF CUSTOMER RETENTION
+// create an indicator for customers that were retained
+// customers that were NOT retained will have missing data for _0profit
+// == is "equal to", and ~= is "not equal to"
+g retain=0 if _0profit==.
+replace retain=1 if _0profit~=.
+
+
 
 // PART 4: USING LOGISTIC REGRESSION WITH A BINARY DEPENDENT VARIABLE
 // PART 5: INTERPRETING LOGISTIC REGRESSION COEFFICIENTS
