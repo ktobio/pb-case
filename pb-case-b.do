@@ -44,9 +44,22 @@ regress _0profit _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._
 // We should also control for the customer's profitability in 1999
 regress _0profit _9profit _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
 
-
 // PART 2: FORECAST INDIVIDUAL CUSTOMER PROFITABILITY
+// Export variable names and coefficients to Excel, where it can be used as a model to forecast individual customers' potential profitability
+// This command sets up the Excel file where we will be exporting our results
+putexcel set "data/forecast-model.xls", replace
+// This command tells Stata to put the heading "Variable Name" in the A1 (top lefthand corner) cell
+putexcel A1="Variable Name"
+// This command tells Stata to put the heading "Variable" in the B1  cell
+putexcel B1="Coefficient"
+// This command creates a 2x11 matrix with variable names on the lefthand side and coefficients on the righthand side
+matrix b = e(b)'
+// This command exports the matrix into Excel
+// NB: This command will write over the "data/forecast-model.xls" file every time the program is run. To keep any work you do on this file, save it to another location.
+putexcel A2 = matrix(b), rownames nformat(number_d2)
+
 // PART 3: IDENTIFY DRIVERS OF CUSTOMER RETENTION
+
 // PART 4: USING LOGISTIC REGRESSION WITH A BINARY DEPENDENT VARIABLE
 // PART 5: INTERPRETING LOGISTIC REGRESSION COEFFICIENTS
 
