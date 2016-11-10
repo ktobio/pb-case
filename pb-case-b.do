@@ -26,19 +26,39 @@ set linesize 200
 // log files should be placed in a folder named "logs" in your directory 
 log using "logs/pb-case-b", replace
 
-// data should be placed in a folder named "data" in your directory 
-// the data is in .csv (comma seperated values) format
-// this command reads the data into Stata
-insheet using "data/pb-case-data.csv", names
-
-// code here that labels the variables?
-
-// save the data as a Stata dataset
-save "data/pb-case-data.dta", replace
+// we created a set of variable in Part A of this case, and they may be useful to us now
+// so, we use our saved dataset
+use "data/pb-case-data-new-variables.dta"
 
 // displays summary statistics for online customers in 1999 and 2000
 sum _9online _0online
- 
+
+// WALKING THROUGH THE STATISTICS REVIEW
+
+// PART 1: IDENTIFY DRIVERS OF CUSTOMER PROFITABILITY
+// Do customer attributes from 1999 significantly predict customer profitability in 2000?
+regress _0profit _9online
+// What if we add some controls? What coefficients are significant?
+// the i. command automatically creates dummy variables from a categorical variable.
+regress _0profit _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
+
+// PART 2: FORECAST INDIVIDUAL CUSTOMER PROFITABILITY
+// PART 3: IDENTIFY DRIVERS OF CUSTOMER RETENTION
+// PART 4: USING LOGISTIC REGRESSION WITH A BINARY DEPENDENT VARIABLE
+// PART 5: INTERPRETING LOGISTIC REGRESSION COEFFICIENTS
+
+
+
+
+// closes your log
+log close
+
+// drops all data from Stata's memory
+clear
+
+
+
+//DELETE FROM HERE// 
 // PART 1: COMPARE PROFITABILITY AND RETENTION OF ONLINE AND OFFLINE CUSTOMERS IN 2000
 // the _0online variable is a dummy variable, which equals 1 if a customer is online and equals 0 if a customer is offline
 // the bysort command allows us to compare the average profitability of online and offline customers
@@ -51,6 +71,7 @@ ttest _0profit, by(_0online)
 // regression
 regress _0profit _0online
 
+
 // Retention
 // create an indicator for customers that were retained
 g retained=.
@@ -59,8 +80,12 @@ replace retained=0 if _9profit~=. & _0profit==.
 // replace indicator with 0 if there was an account in 1999 AND in 2000
 replace retained=1 if _9profit~=. & _0profit~=.
 
+
+regress _0profit _9online _9ageAvg _9ageExists _9incAvg _9incExists _9tenure i._9district
+
+
 // PART 3: CHANGE IN PROFITABILITY
 // create a variable that contains the result of a calculation of profitibility growth/loss for each customer
-g profit_growth_9900=(_0profit-_9profit)/_9profit
+*g profit_growth_9900=(_0profit-_9profit)/_9profit
 
  
