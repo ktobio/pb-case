@@ -55,8 +55,8 @@ replace _0state="Left" if retain==0
 // Create a contingency table
 // The "row" command calculates the percentage of row total 
 tabulate _9state _0state, row
-
 // Using Regression to Get Some of the Transition Probabilities
+regress retain _9online _9billpay
 
 // closes your log
 log close
