@@ -64,15 +64,21 @@ putexcel A2 = matrix(b), rownames nformat(number_d2)
 // == is "equal to", and ~= is "not equal to"
 g retain=0 if _0profit==.
 replace retain=1 if _0profit~=.
-
-
+// use the summarize command to determine the share of customers who were not retained
+sum retain
+// Does customer online status from 1999 predict customer retention?
+regress retain _9online
+// What additional customer characteristics from 1999 predict customer retention?
+regress retain _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
 
 // PART 4: USING LOGISTIC REGRESSION WITH A BINARY DEPENDENT VARIABLE
+
+
 // PART 5: INTERPRETING LOGISTIC REGRESSION COEFFICIENTS
 
 
 
-
+stop
 // closes your log
 log close
 
@@ -80,35 +86,3 @@ log close
 clear
 
 
-
-//DELETE FROM HERE// 
-// PART 1: COMPARE PROFITABILITY AND RETENTION OF ONLINE AND OFFLINE CUSTOMERS IN 2000
-// the _0online variable is a dummy variable, which equals 1 if a customer is online and equals 0 if a customer is offline
-// the bysort command allows us to compare the average profitability of online and offline customers
-bysort _0online: sum _0profit
-
-// is the difference between the mean profitability for online and offline customers significant?
-// we can test this in two ways, a t-test and a regression:
-// t-test
-ttest _0profit, by(_0online)
-// regression
-regress _0profit _0online
-
-
-// Retention
-// create an indicator for customers that were retained
-g retained=.
-// replace indicator with 0 if there was an account in 1999 but not in 2000
-replace retained=0 if _9profit~=. & _0profit==.
-// replace indicator with 0 if there was an account in 1999 AND in 2000
-replace retained=1 if _9profit~=. & _0profit~=.
-
-
-regress _0profit _9online _9ageAvg _9ageExists _9incAvg _9incExists _9tenure i._9district
-
-
-// PART 3: CHANGE IN PROFITABILITY
-// create a variable that contains the result of a calculation of profitibility growth/loss for each customer
-*g profit_growth_9900=(_0profit-_9profit)/_9profit
-
- 
