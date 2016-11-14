@@ -2,7 +2,7 @@
 File        : pb-case-b.do  <--- this should be the exact name of THIS document
 Author      : Kristina Tobio 
 Created     : 08 Nov 2016
-Modified    : 10 Nov 2016
+Modified    : 14 Nov 2016
 Description : .do file for Pilgrim Bank Case Part B 
 **********************************************************************************/
 
@@ -22,8 +22,10 @@ set linesize 200
 // you need to change this to the location on your computer where you are storing the .do and data files
 *cd "/Users/ktobio/Desktop/Jeff/Course/Pilgrim Bank/pb-case/"       
 
+// Create two new folders in your main directory. One is "logs" and the other is "figures." We will use them later in this .do file.
+
 // this creates a log file, which will record all of the commands and outputs from this .do file 
-// log files should be placed in a folder named "logs" in your directory 
+// log files should be placed in the logs folder in your directory
 log using "logs/pb-case-b", replace
 
 // we created a set of variable in Part A of this case, and they may be useful to us now
@@ -55,7 +57,7 @@ putexcel B1="Coefficient"
 // This command creates a 2x11 matrix with variable names on the lefthand side and coefficients on the righthand side
 matrix b = e(b)'
 // This command exports the matrix into Excel
-// NB: This command will write over the "data/forecast-model.xls" file every time the program is run. To keep any work you do on this file, save it to another location.
+// NB: This command will write over the "data/forecast-model.xls" file every time the program is run. To keep any work you do on this file after the program is run, save it to another location.
 putexcel A2 = matrix(b), rownames nformat(number_d2)
 
 // PART 3: IDENTIFY DRIVERS OF CUSTOMER RETENTION
@@ -70,8 +72,33 @@ sum retain
 regress retain _9online
 // What additional customer characteristics from 1999 predict customer retention?
 regress retain _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
+// Does adding customer profitability from 1999 have an effect on our results?
+regress retain _9profit _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
 
 // PART 4: USING LOGISTIC REGRESSION WITH A BINARY DEPENDENT VARIABLE
+// Predict customer retention using the above equation
+predict retainPredict
+// Summarizing this predicted variable shows values over 100%, which doesn't make sense
+sum retainPredict
+// We can also graph these results to analyze them visually
+histogram retainP, frequency xtitle(Retain Predict)
+// Save this histogram in your "figures" folder
+graph save "figures/retainPredict", replace
+// Using logistic regression, which may be a better fit
+logit retain _9profit _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
+// We can add our results to the Excel file we created above with our other regression results
+putexcel set "data/forecast-model.xls", modify
+// This command tells Stata to put the heading "Logit Model Predicts" in the D1 cell
+putexcel D1="Logit Model Predicts"
+// This command tells Stata to put the heading "Variable Name" in the D1 cell
+putexcel E1="Variable Name"
+// This command tells Stata to put the heading "Variable" in the E1  cell
+putexcel F1="Coefficient"
+// This command creates a 2x11 matrix with variable names on the lefthand side and coefficients on the righthand side
+matrix b = e(b)'
+// This command exports the matrix into Excel
+// NB: The file "data/forecast-model.xls" is written over every time the program is run. To keep any work you do on this file after the program is run, save it to another location.
+putexcel D2 = matrix(b), rownames nformat(number_d2)
 
 
 // PART 5: INTERPRETING LOGISTIC REGRESSION COEFFICIENTS
