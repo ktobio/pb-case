@@ -81,7 +81,7 @@ predict retainPredict
 // Summarizing this predicted variable shows values over 100%, which doesn't make sense
 sum retainPredict
 // We can also graph these results to analyze them visually
-histogram retainP, frequency xtitle(Retain Predict)
+histogram retainPredict, frequency xtitle(Retain Predict)
 // Save this histogram in your "figures" folder
 graph save "figures/retainPredict", replace
 // Using logistic regression, which may be a better fit
@@ -99,13 +99,20 @@ matrix b = e(b)'
 // This command exports the matrix into Excel
 // NB: The file "data/forecast-model.xls" is written over every time the program is run. To keep any work you do on this file after the program is run, save it to another location.
 putexcel D2 = matrix(b), rownames nformat(number_d2)
-
+// Predict customer retention using the logistic equation
+predict retainLogit
+// Summarizing this predicted variable shows no values over 100%
+sum retainLogit
+// We can also graph these results to analyze them visually
+histogram retainLogit, frequency xtitle(Logistic Retain)
+// Save this histogram in your "figures" folder
+graph save "figures/retainLogit", replace
 
 // PART 5: INTERPRETING LOGISTIC REGRESSION COEFFICIENTS
+// Visually examining the predicted values from the regressions
+scatter retainLogit retainPredict, ytitle(Predicted Logistic) xtitle(Predicted OLS)
+graph save "figures/scatter", replace
 
-
-
-stop
 // closes your log
 log close
 
