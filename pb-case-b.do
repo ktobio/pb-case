@@ -113,6 +113,20 @@ graph save "figures/retainLogit", replace
 scatter retainLogit retainPredict, ytitle(Predicted Logistic) xtitle(Predicted OLS)
 graph save "figures/scatter", replace
 
+// FROM TEACHING NOTE - NOT IN STATISTICS REVIEW
+
+// PART 6: DEMOGRAPHICS OR PROFIT FOR PREDICTING FUTURE PROFIT AND RETURN
+// What is the incremental benefit of purchasing demographic data for use in the regressions?
+// The ".i" before a variable name creates dummy variables for the values of that variable 
+// Regression including demographic data
+regress _0profit _9profit _9online _9tenure i._9district i._9age i._9inc
+// Regression without demographic data
+// To insure we are using the same observations, we restrict this regression to the observations where demographic variables are available
+regress _0profit _9profit _9online _9tenure if _9district~=. & _9age~=. & _9inc~=.
+// Regression with only demographic data
+regress _0profit i._9district i._9age i._9inc if _9district~=. & _9age~=. & _9inc~=.
+
+stop
 // We created a number of variables in this .do file that may be useful to us later
 // So, we save this as a new dataset
 save "data/pb-case-data-new-variables-b.dta", replace

@@ -30,6 +30,9 @@ log using "logs/pb-case-c", replace
 // so, we use our saved dataset
 use "data/pb-case-data-new-variables-b.dta"
 
+// WALKING THROUGH THE STATISTICS REVIEW
+// The teaching note has similar analyses, but doesn't include the demographic varibles of age, income, and district
+
 // PART 1: ADD ELECTRONIC BILLBAY TO DRIVERS OF CUSTOMER RETENTION
 // Here is our regression from Part B, where we predict 2000 profit based on 1999 characteristics
 regress _0profit _9profit _9online _9tenure _9incZero _9ageZero _9incExist _9ageExist i._9district
