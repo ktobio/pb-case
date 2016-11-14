@@ -22,7 +22,7 @@ set linesize 200
 // you need to change this to the location on your computer where you are storing the .do and data files
 *cd "/Users/ktobio/Desktop/Jeff/Course/Pilgrim Bank/pb-case/"       
 
-// Create two new folders in your main directory. One is "logs" and the other is "figures." We will use them later in this .do file.
+// Create two new folders in your main directory. One should be called "logs" and the other "figures." We will use them later in this .do file.
 
 // this creates a log file, which will record all of the commands and outputs from this .do file 
 // log files should be placed in the logs folder in your directory
@@ -112,6 +112,10 @@ graph save "figures/retainLogit", replace
 // Visually examining the predicted values from the regressions
 scatter retainLogit retainPredict, ytitle(Predicted Logistic) xtitle(Predicted OLS)
 graph save "figures/scatter", replace
+
+// We created a number of variables in this .do file that may be useful to us later
+// So, we save this as a new dataset
+save "data/pb-case-data-new-variables-b.dta", replace
 
 // closes your log
 log close
