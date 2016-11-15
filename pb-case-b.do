@@ -126,7 +126,6 @@ regress _0profit _9profit _9online _9tenure if _9district~=. & _9age~=. & _9inc~
 // Regression with only demographic data
 regress _0profit i._9district i._9age i._9inc if _9district~=. & _9age~=. & _9inc~=.
 
-stop
 // We created a number of variables in this .do file that may be useful to us later
 // So, we save this as a new dataset
 save "data/pb-case-data-new-variables-b.dta", replace
