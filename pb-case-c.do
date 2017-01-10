@@ -2,7 +2,7 @@
 File        : pb-case-c.do  <--- this should be the exact name of THIS document
 Author      : Kristina Tobio 
 Created     : 08 Nov 2016
-Modified    : 14 Nov 2016
+Modified    : 10 Jan 2017
 Description : .do file for Pilgrim Bank Case Part C 
 **********************************************************************************/
 
@@ -13,14 +13,12 @@ capture log close
 clear       
 // this makes it so you don't have to keep pressing return/enter to scroll through results
 set more off          
-// this sets memory size
-set mem 100m       
 // this keeps everything visible on a normal monitor or laptop screen
 set linesize 200    
 
 // cd means "change directory"
-// you need to change this to the location on your computer where you are storing the .do and data files
-*cd "/Users/ktobio/Desktop/Jeff/Course/Pilgrim Bank/pb-case/"       
+// changes to the current director 
+cd .
 
 // this creates a log file, which will record all of the commands and outputs from this .do file 
 // log files should be placed in the logs folder in your directory
