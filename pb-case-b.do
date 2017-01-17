@@ -17,7 +17,7 @@ set more off
 set linesize 200    
 
 // cd means "change directory"
-// changes to the current director 
+// changes to the current directory 
 cd .  
 
 // Create two new folders in your main directory. One should be called "logs" and the other "figures." We will use them later in this .do file.

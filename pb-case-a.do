@@ -17,7 +17,7 @@ set more off
 set linesize 200    
 
 // cd means "change directory"
-// changes to the current director 
+// changes to the current directory 
 cd .
 
 // this creates a log file, which will record all of the commands and outputs from this .do file 
