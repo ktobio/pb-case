@@ -157,7 +157,8 @@ regress _9profit _9online _9ageAvg _9ageExists _9incAvg _9incExists _9tenure _9d
 regress _9profit _9online _9ageAvg _9ageExists _9incAvg _9incExists _9tenure i._9district
 
 // because we created some new variables, we want to save this dataset in case we want to use it later
-save "data/pb-case-data-new-variables.dta", replace
+save "data/pb-case-data-new-variables.dta"
+// Note that this save command did not work for Jeff
 
 // closes your log
 log close
