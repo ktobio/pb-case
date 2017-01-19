@@ -1,8 +1,8 @@
 /**********************************************************************************
-File        : pb-case-a.do  <--- this should be the exact name of THIS document
+File        : PA_pilgrimA_code.do  <--- this should be the exact name of THIS document
 Author      : Kristina Tobio 
 Created     : 07 Nov 2016
-Modified    : 10 Jan 2017
+Modified    : 19 Jan 2017
 Description : .do file for Pilgrim Bank Case Part A 
 **********************************************************************************/
 
@@ -22,7 +22,7 @@ cd .
 
 // this creates a log file, which will record all of the commands and outputs from this .do file 
 // log files should be placed in a folder named "logs" in your directory 
-log using "logs/pb-case-a", replace
+log using "logs/PA_pilgrimA_log", replace
 
 // data should be placed in a folder named "data" in your directory 
 // the data is in .csv (comma seperated values) format
