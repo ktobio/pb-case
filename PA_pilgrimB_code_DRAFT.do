@@ -140,7 +140,7 @@ regress profit_00 i.district_99 i.age_99 i._9inc if district_99~=. & age_99~=. &
 
 // We created a number of variables in this .do file that may be useful to us later
 // So, we save this as a new dataset
-save "data/pb-case-data-new-variables-b.dta", replace
+save "data/PA_pilgrimB_updated.dta", replace
 
 // closes your log
 log close

@@ -167,7 +167,7 @@ regress profit_99 online_99 age_99_Avg age_99_Exists income_99_Avg income_99_Exi
 regress profit_99 online_99 age_99_Avg age_99_Exists income_99_Avg income_99_Exists tenure_99 i.district_99
 
 // because we created some new variables, we want to save this dataset in case we want to use it later
-save "data/PA_pilgrim_updated_data.dta", replace
+save "data/PA_pilgrimA_updated_data.dta", replace
 // Note that this save command did not work for Jeff
 
 // closes your log
