@@ -1,5 +1,5 @@
 /**********************************************************************************
-File        : PA_pilgrimA_code.do  <--- this should be the exact name of THIS document
+File        : PA_pilgrimA_code_DRAFT.do  <--- this should be the exact name of THIS document
 Author      : Kristina Tobio 
 Created     : 07 Nov 2016
 Modified    : 19 Jan 2017
