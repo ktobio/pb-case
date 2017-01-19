@@ -29,10 +29,20 @@ log using "logs/PA_pilgrimA_log", replace
 // this command reads the data into Stata
 import excel using "data/PA_pilgrimA_data.xls", firstrow
 
-// code here that labels the variables?
+// this code labels the variables
+label var id "Customer ID"
+label var profit_99 "Annual Profit, 1999" 
+label var online_99 "Online Usage, 1999"
+label var age_99 "Age Bucket, 1999"
+label var income_99 "Income Bucket, 1999"
+label var tenure_99 "Tenure (years), 1999"
+label var district_99 "Geographic Region, 1999"
 
 // save the data as a Stata dataset
 *save "data/pb-case-data.dta", replace
+
+// this describes the data, including listing the names and labels
+describe
 
 // displays summary statistics for all variables
 summarize 
@@ -157,7 +167,7 @@ regress profit_99 online_99 age_99_Avg age_99_Exists income_99_Avg income_99_Exi
 regress profit_99 online_99 age_99_Avg age_99_Exists income_99_Avg income_99_Exists tenure_99 i.district_99
 
 // because we created some new variables, we want to save this dataset in case we want to use it later
-save "data/pb-case-data-new-variables.dta", replace
+save "data/PA_pilgrim_updated_data.dta", replace
 // Note that this save command did not work for Jeff
 
 // closes your log
