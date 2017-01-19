@@ -28,7 +28,7 @@ log using "logs/pb-case-b", replace
 
 // we created a set of variable in Part A of this case, and they may be useful to us now
 // so, we use our saved dataset
-use "data/pb-case-data-new-variables.dta"
+use "data/PA_pilgrimB_data.dta"
 
 // displays summary statistics for online customers in 1999 and 2000
 sum _9online _0online

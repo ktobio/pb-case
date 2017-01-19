@@ -26,7 +26,7 @@ log using "logs/PA_pilgrimC_log", replace
 
 // we created a set of variable in Part B of this case, and they may be useful to us now
 // so, we use our saved dataset
-use "data/pb-case-data-new-variables-b.dta"
+use "data/PA_pilgrimC_data.dta"
 
 // label variables
 label var id "Customer ID"

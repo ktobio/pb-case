@@ -42,7 +42,7 @@ label var profit_00 "Annual Profit, 2000"
 label var online_00 "Online Usage, 2000"
 
 // describes the data, including variable names and labels
-describ
+describe
 
 // displays summary statistics for online customers in 1999 and 2000
 sum online_99 online_00
@@ -61,7 +61,7 @@ regress profit_00 profit_99 online_99 tenure_99 income_99_Zero age_99_Zero incom
 // PART 2: FORECAST INDIVIDUAL CUSTOMER PROFITABILITY
 // Export variable names and coefficients to Excel, where it can be used as a model to forecast individual customers' potential profitability
 // This command sets up the Excel file where we will be exporting our results
-putexcel set "data/forecast-model.xls", replace
+putexcel set "data/forecast-model-B.xls", replace
 // This command tells Stata to put the heading "Variable Name" in the A1 (top lefthand corner) cell
 putexcel A1="Variable Name"
 // This command tells Stata to put the heading "Variable" in the B1  cell
@@ -69,7 +69,7 @@ putexcel B1="Coefficient"
 // This command creates a 2x11 matrix with variable names on the lefthand side and coefficients on the righthand side
 matrix b = e(b)'
 // This command exports the matrix into Excel
-// NB: This command will write over the "data/forecast-model.xls" file every time the program is run. To keep any work you do on this file after the program is run, save it to another location.
+// NB: This command will write over the "data/forecast-model-B.xls" file every time the program is run. To keep any work you do on this file after the program is run, save it to another location.
 putexcel A2 = matrix(b), rownames nformat(number_d2)
 
 // PART 3: IDENTIFY DRIVERS OF CUSTOMER RETENTION
@@ -99,7 +99,7 @@ graph save "figures/retainPredict", replace
 // Using logistic regression, which may be a better fit
 logit retain profit_99 online_99 tenure_99 income_99_Zero age_99_Zero income_99_Exist age_99_Exist i.district_99
 // We can add our results to the Excel file we created above with our other regression results
-putexcel set "data/forecast-model.xls", modify
+putexcel set "data/forecast-model-B.xls", modify
 // This command tells Stata to put the heading "Logit Model Predicts" in the D1 cell
 putexcel D1="Logit Model Predicts"
 // This command tells Stata to put the heading "Variable Name" in the D1 cell
@@ -109,7 +109,7 @@ putexcel F1="Coefficient"
 // This command creates a 2x11 matrix with variable names on the lefthand side and coefficients on the righthand side
 matrix b = e(b)'
 // This command exports the matrix into Excel
-// NB: The file "data/forecast-model.xls" is written over every time the program is run. To keep any work you do on this file after the program is run, save it to another location.
+// NB: The file "data/forecast-model-B.xls" is written over every time the program is run. To keep any work you do on this file after the program is run, save it to another location.
 putexcel D2 = matrix(b), rownames nformat(number_d2)
 // Predict customer retention using the logistic equation
 predict retainLogit
@@ -131,16 +131,16 @@ graph save "figures/scatter", replace
 // What is the incremental benefit of purchasing demographic data for use in the regressions?
 // The ".i" before a variable name creates dummy variables for the values of that variable 
 // Regression including demographic data
-regress profit_00 profit_99 online_99 tenure_99 i.district_99 i.age_99 i._9inc
+regress profit_00 profit_99 online_99 tenure_99 i.district_99 i.age_99 i.income_99
 // Regression without demographic data
 // To insure we are using the same observations, we restrict this regression to the observations where demographic variables are available
-regress profit_00 profit_99 online_99 tenure_99 if district_99~=. & age_99~=. & _9inc~=.
+regress profit_00 profit_99 online_99 tenure_99 if district_99~=. & age_99~=. & income_99~=.
 // Regression with only demographic data
-regress profit_00 i.district_99 i.age_99 i._9inc if district_99~=. & age_99~=. & _9inc~=.
+regress profit_00 i.district_99 i.age_99 i.income_99 if district_99~=. & age_99~=. & income_99~=.
 
 // We created a number of variables in this .do file that may be useful to us later
 // So, we save this as a new dataset
-save "data/PA_pilgrimB_updated.dta", replace
+save "data/PA_pilgrimB_updated_data.dta", replace
 
 // closes your log
 log close
