@@ -27,12 +27,12 @@ log using "logs/PA_pilgrimA_log", replace
 // data should be placed in a folder named "data" in your directory 
 // the data is in .csv (comma seperated values) format
 // this command reads the data into Stata
-insheet using "data/pb-case-data.csv", names
+import excel using "data/PA_pilgrimA_data.xls", firstrow
 
 // code here that labels the variables?
 
 // save the data as a Stata dataset
-save "data/pb-case-data.dta", replace
+*save "data/pb-case-data.dta", replace
 
 // displays summary statistics for all variables
 summarize 
