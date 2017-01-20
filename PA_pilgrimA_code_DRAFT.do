@@ -25,9 +25,11 @@ cd .
 log using "logs/PA_pilgrimA_log", replace
 
 // data should be placed in a folder named "data" in your directory 
-// the data is in .csv (comma seperated values) format
 // this command reads the data into Stata
 import excel using "data/PA_pilgrimA_data.xls", firstrow
+
+// if that doesn't work, comment that row out using //, and delete the // below
+// use "data/PA_pilgrimA_data.dta"
 
 // this code labels the variables
 label var id "Customer ID"

@@ -26,7 +26,12 @@ log using "logs/PA_pilgrimC_log", replace
 
 // we created a set of variable in Part B of this case, and they may be useful to us now
 // so, we use our saved dataset
-use "data/PA_pilgrimC_data.dta"
+// this command reads the data into Stata
+import excel using "data/PA_pilgrimC_data.xls", firstrow
+
+// if that doesn't work, comment that row out using //, and delete the // below
+// use "data/PA_pilgrimC_data.dta"
+
 
 // label variables
 label var id "Customer ID"
