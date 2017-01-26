@@ -1,16 +1,14 @@
 /**********************************************************************************
-File        : PA_pilgrimA_code_DRAFT.do  <--- this should be the exact name of THIS document
+File        : PA_pilgrimA_code_TN.do  <--- this should be the exact name of THIS document
 Author      : Kristina Tobio 
 Created     : 07 Nov 2016
-Modified    : 19 Jan 2017
-Description : .do file for Pilgrim Bank Case Part A 
+Modified    : 25 Jan 2017
+Description : .do file for Pilgrim Bank Case Part A - Teaching Note Edition
 **********************************************************************************/
 
-
-
-// the following five commands prepare your computer for the data and analysis
-// these five commands are optional, but helpful
-// to run them, highlight this block of text, including the five commands
+// the following four commands prepare your computer for the data and analysis
+// these four commands are optional, but helpful
+// to run them, highlight this block of text, including the four commands
 // while they are highlighted, click the execute Do button above
 // the capture command finds and closes open log files
 capture log close        
@@ -23,8 +21,6 @@ set linesize 200
 
 // after executing the commands above, we recommend opening a log file
 // log files record all of the commands and output from your work session 
-
-
 
 // this code labels the variables
 label var id "Customer ID"
@@ -51,9 +47,6 @@ sum profit_99, detail
 // other analyses are up to you!
 // please be prepared in class on Wednesday to discuss how you analyzed the data
 // the "Stata Basics" guide on Canvas may be helpful
-
-
-
 
 
 // WALKING THROUGH THE STATISTICS REVIEW
