@@ -39,15 +39,21 @@ contents(PA_pilgrimA_data)
 
 # displays summary statistics for all variables
 summary(PA_pilgrimA_data)
+summary(PA_pilgrimA_data$profit_99)
 
 # WALKING THROUGH THE STATISTICS REVIEW
 
-install.packages("doBy")
-library("doBy")
-
 # PART 1: EXPLORE PROFIT
 # calculating the 95% confidence interval for average (mean) customer profitability in 1999
-LSmeans(PA_pilgrimA_data.profit_99, level=.95)
+#std <- sd(PA_pilgrimA_data$profit_99)/sqrt(length(PA_pilgrimA_data$profit_99))
+t.test(PA_pilgrimA_data$profit_99)
+
+
+#PART 2: COMPARE PROFITABILITY OF ONLINE AND OFFLINE CUSTOMERS
+#the online_99 variable is a dummy variable, which equals 1 if a customer is online and equals 0 if a customer is offline
+#the bysort command allows us to compare the average profitability of online and offline customers
+#bysort online_99: sum profit_99
+
 
 # closes your log
 #log close
