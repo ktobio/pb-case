@@ -257,7 +257,7 @@ label(pilgrimB.data$age_99_Avg) <- "Age replaced with Age Average if Missing 199
 #label var income_exist_99 "Income Exists Indicator, 1999 (1=income exists)"
 #replace income_exist_99=0 if income_exist_99==.
 #
-pilgrimB.data$income_exist_99 <- ifelse(is.na(pilgrimB.data$age_99), 0, 1)
+pilgrimB.data$income_exist_99 <- ifelse(is.na(pilgrimB.data$income_exist_99), 0, 1)
 label(pilgrimB.data$income_exist_99) <-  "Income Exists Indicator 1999 (1=income exists)"
 #
 # create a variable just like income_99, except that we subsitute the missing observations with zero
