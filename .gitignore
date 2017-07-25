@@ -1,4 +1,8 @@
-/data/
-/logs/
-/figures/
+/R/data/
+/R/logs/
+/R/figures/
+/R/.Rproj.user/
+/Stata/data/
+/Stata/logs/
+/Stata/figures/
 
